@@ -251,12 +251,25 @@
         cp ${backup_target_file} ${backup_list_gameserver}
         screen -AmdS ${server_screen_title}_backup tar -zcf ${backup_location_gameserver}/${date_day_month_year}.backup.tar.gz --files-from ${backup_list_gameserver}
     }
-        
     
+    command_screen()
+    {
+        screen_wipe
+        if screen -list | grep -q ${server_screen_title}_console; then
+            screen -x ${server_screen_title}_console
+        elif screen -list | grep -q ${server_screen_title}_update; then
+            screen -x ${server_screen_title}_update
+        elif screen -list | grep -q ${server_screen_title}_install; then
+            screen -x ${server_screen_title}_install
+        elif screen -list | grep -q ${server_screen_title}_backup; then
+            screen -x ${server_screen_title}_backup
+        fi
+    }
+
     # Действие с сервером
     case "${2}" in
         console|screen)
-            server_screen
+            command_screen
         ;;
         start)
             command_start ${3}
@@ -291,4 +304,3 @@
 #                       #     ####  ###### # #    #  #####   ####  #    # #                         #
 #                                                                                                   #
 #####################################################################################################
-    
