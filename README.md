@@ -1,4 +1,4 @@
-UniversalGameManager_2014
+UniversalGameManager_2014 [В РАЗРАБОТКЕ]
 =========================
 
 Управление игровым сервером на базе SRCDS
