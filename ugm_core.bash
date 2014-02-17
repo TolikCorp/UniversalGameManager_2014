@@ -224,7 +224,6 @@
                         grep -v ${i} ${backup_list_gameserver}.backup.part2 > ${backup_list_gameserver}.backup.part1
                         index="0"
                     fi
-                else
                     echo "${i} идентичен оригиналу"
                 fi
             else
