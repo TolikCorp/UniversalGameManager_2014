@@ -1,4 +1,4 @@
-#!/bin/sh/
+#!/bin/sh
 ####################################################
     date_day_month_year=`date +%F`
     date_hours_minutes_seconds=`date +%T`
