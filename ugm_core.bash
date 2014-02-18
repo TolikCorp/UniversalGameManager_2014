@@ -202,6 +202,7 @@
     
     command_backup)
     {
+        command_stop
         backup_location_distrib="${distrib_dir}/${server_app_id}"
         if [[ ! -d "${distrib_dir}/${server_app_id}" ]]; then
             echo "${ilh} Дистрибутива ${distrib_dir}/${server_app_id} нет. Попробуйте позже."
