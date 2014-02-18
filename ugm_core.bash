@@ -185,6 +185,7 @@
     
     command_install
     {
+        command_stop
         if [ -f "${server_dir}/screenlog.0" ]; then
             cp ./screenlog.0 screenlog.1 > /dev/null 2>&1
             rm ./screenlog.0 > /dev/null 2>&1
