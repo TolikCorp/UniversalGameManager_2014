@@ -136,6 +136,8 @@
             fi
         }
         command_stop
+        chown ${server_user} ${server_conf}
+        chmod 600 ${server_conf}
         case ${1} in
             autoupdate)
                 autoupdate_conf_create
@@ -202,7 +204,7 @@
     
     command_backup)
     {
-        command_stop
+        kill_screen ${server_screen_title}_backup
         backup_location_distrib="${distrib_dir}/${server_app_id}"
         if [[ ! -d "${distrib_dir}/${server_app_id}" ]]; then
             echo "${ilh} Дистрибутива ${distrib_dir}/${server_app_id} нет. Попробуйте позже."
