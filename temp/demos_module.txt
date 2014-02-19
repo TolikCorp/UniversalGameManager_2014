@@ -1,0 +1,36 @@
+    # Добавить в ядро и конфиги server_path_mod - путь до папки с модом игры
+    demos_dir="/var/www/demos"
+    # demos_clean_mode - метод очистки устаревших записей. 1 -по времени (7 дней), 2 - по занимаемому размеру всего каталога пользователя (4096 MB)
+    demos_clean_mode="1"
+    mkdir -p ${demos_dir}
+    chmod 644 ${demos_dir}
+    if [[ -d "${demos_dir}" ]]; then
+        user_demos_dir="${demos_dir}/${server_ip_address}_${server_game_port}"
+        mkdir -p ${user_demos_dir}
+        if [ "${demos_clean_mode}" -eq "1" ]; then
+            find ${autoupdate_conf_dir} -mtime  +7 -exec rm {} \;
+        elif [ "${demos_clean_mode}" -eq "2" ]; then
+            demos_size_dir="$(( $(du -sc ${user_demos_dir} | tail -1 | awk '{print $1}') / 1024 ))"
+            while [ "${demos_size_dir}" -gt "4096" ]; do
+                rm -f $(find ${demos_size_dir} -print  | sort | head -2 | tail -1)
+                demos_size_dir="$(( $(du -sc ${user_demos_dir} | tail -1 | awk '{print $1}') / 1024 ))"
+            done
+        fi
+        cd ${server_dir}/${server_path_mod}
+        file_list=$(ls ./ | grep .dem | sed '$d')
+        if [ -z "${file_list}" ]; then
+            echo "${ilh} Недостаточно Демо-Записей для перемещения или полное отсутствие их"
+            exit 1
+        else
+            mkdir -p ${user_demos_dir}
+            echo "${ilh} Каталог для ДЕМО-Записей ${user_demos_dir}"
+            for i in ${file_list}; do
+                echo "${ilh} Перемещение ${i}"
+                mv $i ${user_demos_dir}
+            done
+        fi
+        chmod -R 644 ${user_demos_dir}
+    else
+        echo "${ilh} Каталога ${demos_dir} нет. Попробуйте позже."
+        exit 1
+    fi
