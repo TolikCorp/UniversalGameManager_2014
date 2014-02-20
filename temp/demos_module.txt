@@ -10,9 +10,8 @@
         if [ "${demos_clean_mode}" -eq "1" ]; then
             find ${autoupdate_conf_dir} -mtime  +7 -exec rm {} \;
         elif [ "${demos_clean_mode}" -eq "2" ]; then
-            while [ "${demos_size_dir}" -gt "4096" ]; do
-                demos_size_dir="$(( $(du -sc ${user_demos_dir} | tail -1 | awk '{print $1}') / 1024 ))"
-                demos_del_file="$(find ${demos_size_dir} -print  | sort | head -2 | tail -1)"
+            while [ "$(( $(du -sc ${user_demos_dir} | tail -1 | awk '{print $1}') / 1024 ))" -gt "4096" ]; do
+                demos_del_file="$(find ${user_demos_dir} -print  | sort | head -2 | tail -1)"
                 if [ -f "${demos_del_file}" ]; then
                     rm -f ${demos_del_file}
                 fi
