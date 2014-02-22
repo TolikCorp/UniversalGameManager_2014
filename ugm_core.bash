@@ -13,6 +13,11 @@
     distrib_dir="/home/distrib"
     steamcmd="/home/distrib/steamcmd/steamcmd.sh"
     
+    if [ "$(id -u)" -ne "0" ]; then
+        echo "${ilh} Пользователь не root"
+        exit 1
+    fi
+    
     error_msg ()
     {
         echo "#######################################################"
@@ -34,10 +39,6 @@
     
     command_setup()
     {
-        if [ "$(id -u)" -ne "0" ]; then
-            echo "${ilh} Пользователь не root"
-            exit 1
-        fi
         apt-get install --yes lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt
     }
     
