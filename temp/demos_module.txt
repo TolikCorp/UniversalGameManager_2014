@@ -1,4 +1,3 @@
-    # Добавить в ядро и конфиги server_path_mod - путь до папки с модом игры
     demos_dir="/var/www/demos"
     # demos_clean_mode - метод очистки устаревших записей. 1 -по времени (7 дней), 2 - по занимаемому размеру всего каталога пользователя (4096 MB)
     demos_clean_mode="1"
@@ -17,7 +16,7 @@
                 fi
             done
         fi
-        cd ${server_dir}/${server_path_mod}
+        cd ${server_dir}/${server_run_title}
         file_list=$(ls ./ | grep .dem | sed '$d')
         if [ -z "${file_list}" ]; then
             echo "${ilh} Недостаточно Демо-Записей для перемещения или полное отсутствие их"
