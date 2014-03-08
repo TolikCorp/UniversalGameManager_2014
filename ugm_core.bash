@@ -156,17 +156,17 @@
         case ${1} in
             autoupdate)
                 autoupdate_conf_create
-                screen -AmdS ${server_screen_title}_console ${sudo_run} sh ${server_conf} autoupdate $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g') ${autoupdate_conf_dir}/${autoupdate_conf_file}
+                screen -AmdS ${server_screen_title}_console ${sudo_run} "sh ${server_conf} autoupdate $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g') ${autoupdate_conf_dir}/${autoupdate_conf_file}"
             ;;
             *)
-                screen -AmdS ${server_screen_title}_console ${sudo_run} sh ${server_conf}
+                screen -AmdS ${server_screen_title}_console ${sudo_run} "sh ${server_conf}"
             ;;
         esac
         # Расположение скрипта мониторинга состояния. Требуются права доступа не менее 555
         monitoring_script_file="${aio_dir}/srcds_status_checker.py"
         if [ -f "${monitoring_script_file}" ]; then
             chmod 555 "${monitoring_script_file}"
-            screen -AmdS ${server_screen_title}_monitoring python ${sudo_run} ${monitoring_script_file} ${server_ip_address} ${server_game_port} "${aio_dir}/${aio_file} ${server_conf} restart"
+            screen -AmdS ${server_screen_title}_monitoring python ${sudo_run} "${monitoring_script_file} ${server_ip_address} ${server_game_port} \"${aio_dir}/${aio_file} ${server_conf} restart\""
         else
             echo "${ilh} Файл ${monitoring_script_file} не найден!"
         fi
