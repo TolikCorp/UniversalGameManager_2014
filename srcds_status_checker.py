@@ -20,10 +20,10 @@ def server_moninoring(ip,port,exec_cmd):
    retry = retry + 1
    print "RETRY: " + str(retry)
    if retry > 4:
-     print "[--------- Retry is more than 5, send restart shell cmd to system!"
-     print exec_cmd
-     os.system(exec_cmd)
-     retry = 0
+    print "[--------- Retry is more than 5, send restart shell cmd to system!"
+    print exec_cmd
+    os.system(exec_cmd)
+    retry = 0
    time.sleep(60)
    pass
   else:
