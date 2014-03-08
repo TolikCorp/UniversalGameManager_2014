@@ -217,7 +217,7 @@
         fi
     }
     
-    command_backup)
+    command_backup()
     {
         kill_screen ${server_screen_title}_backup
         backup_location_distrib="${distrib_dir}/${server_app_id}"
