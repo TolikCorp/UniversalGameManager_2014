@@ -42,7 +42,7 @@
     
     command_setup()
     {
-        apps="lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt"
+        apps="lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt python"
         for i in ${apps}; do
             apt-get install --yes ${i}
         done
