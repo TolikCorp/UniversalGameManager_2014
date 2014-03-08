@@ -197,7 +197,7 @@
             rm ./screenlog.0 > /dev/null 2>&1
             chown ${server_user} ./screenlog.1
         fi
-        screen -AmdLS ${server_screen_title}_update ${sudo_run} ${steamcmd} +login anonymous +force_install_dir ${server_dir} +app_update ${server_app_id} validate +quit
+        screen -AmdLS ${server_screen_title}_update ${sudo_run} "${steamcmd} +login anonymous +force_install_dir ${server_dir} +app_update ${server_app_id} validate +quit"
     }
     
     command_install()
