@@ -49,6 +49,7 @@
             cp ${aio_dir}/steamcmd_linux.tar.gz ./
             tar xvfz steamcmd_linux.tar.gz
             ./steamcmd.sh
+        fi
         exit 0
     }
         
