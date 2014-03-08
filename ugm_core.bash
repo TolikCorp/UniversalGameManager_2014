@@ -200,7 +200,7 @@
         screen -AmdLS ${server_screen_title}_update ${sudo_run} ${steamcmd} +login anonymous +force_install_dir ${server_dir} +app_update ${server_app_id} validate +quit
     }
     
-    command_install
+    command_install()
     {
         command_stop
         if [ -f "${server_dir}/screenlog.0" ]; then
