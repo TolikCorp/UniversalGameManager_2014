@@ -11,7 +11,7 @@
     
     default_iface="eth1"
     distrib_dir="/home/distrib"
-    steamcmd="/home/distrib/steamcmd/steamcmd.sh"
+    steamcmd="${distrib_dir}/steamcmd/steamcmd.sh"
     
     if [ "$(id -u)" -ne "0" ]; then
         echo "${ilh} Пользователь не root"
@@ -32,6 +32,9 @@
         exit 1
     }
     
+    aio_dir="$(cd "$(dirname "${0}")"; pwd)"
+    aio_file="$(basename $0)"
+    
     screen_wipe()
     {
         screen -wipe > /dev/null 2>&1
@@ -40,12 +43,15 @@
     command_setup()
     {
         apt-get install --yes lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt
+        if [ -f "${aio_dir}/steamcmd_linux.tar.gz" ]; then
+            mkdir -p $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
+            cd $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
+            cp ${aio_dir}/steamcmd_linux.tar.gz ./
+            tar xvfz steamcmd_linux.tar.gz
+            ./steamcmd.sh
         exit 0
     }
-    
-    aio_dir="$(cd "$(dirname "${0}")"; pwd)"
-    aio_file="$(basename $0)"
-    
+        
     case "${1}" in
         setup)
             command_setup
