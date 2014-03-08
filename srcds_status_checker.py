@@ -37,6 +37,7 @@ ip = sys.argv[1]
 port = sys.argv[2]
 exec_cmd = sys.argv[3]
 print "[--------- Server "+ip+":"+port+" successfully loaded"
+print "\n"
 thread.start_new_thread(server_moninoring, (ip,port,exec_cmd))
 while 1:
  time.sleep(60)
