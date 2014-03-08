@@ -42,7 +42,10 @@
     
     command_setup()
     {
-        apt-get install --yes lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt
+        apps="lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt"
+        for i in ${apps}; do
+            apt-get install --yes ${i}
+        done
         if [ -f "${aio_dir}/steamcmd_linux.tar.gz" ]; then
             mkdir -p $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
             cd $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
