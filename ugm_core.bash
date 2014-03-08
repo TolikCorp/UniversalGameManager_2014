@@ -40,6 +40,7 @@
     command_setup()
     {
         apt-get install --yes lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt
+        exit 0
     }
     
     aio_dir="$(cd "$(dirname "${0}")"; pwd)"
@@ -51,7 +52,10 @@
         ;;
     esac
     
-    if [ -z ${1} -o ${2} ]; then
+    if [ -z ${1} ]; then
+        error_msg
+    fi
+    if [ -z ${2} ]; then
         error_msg
     fi
     if [[ ! -f ${steamcmd} ]]; then
