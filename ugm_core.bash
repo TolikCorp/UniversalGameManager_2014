@@ -42,16 +42,21 @@
     
     command_setup()
     {
+        echo "${ilh} Установка необходимых пакетов"
         apps="lib32gcc1 zlib1g lib32z1 ia32-libs screen cron-apt python"
         for i in ${apps}; do
+            echo "${ilh} Установка ${i}"
             apt-get install --yes ${i}
         done
+        echo "${ilh} Создание каталога дистрибутивов"
+        mkdir -p ${distrib_dir}
         if [ -f "${aio_dir}/steamcmd_linux.tar.gz" ]; then
+            echo "${ilh} Установка SteamCMD"
             mkdir -p $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
             cd $(echo ${steamcmd} | sed 's%/steamcmd.sh%%g')
             cp ${aio_dir}/steamcmd_linux.tar.gz ./
             tar xvfz steamcmd_linux.tar.gz
-            ./steamcmd.sh
+            ./steamcmd.sh +quit
         fi
         exit 0
     }
