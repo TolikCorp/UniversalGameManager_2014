@@ -67,11 +67,11 @@
             supported_apps="|740|232330|232370|232250|"
             read -p "${ilh} Выпишите через пробел AppID необходимых Вам игр: " required_apps
             if [ -n "${required_apps}" ]; then
-            for i in ${required_apps}; do
-                if echo "${supported_apps}" | grep -q "|${i}|"; then
-                    required_apps_steamcmd="${required_apps_steamcmd}+force_install_dir ${distrib_dir}/${i} +app_update ${i} validate "
-                fi
-            done
+                for i in ${required_apps}; do
+                    if echo "${supported_apps}" | grep -q "|${i}|"; then
+                        required_apps_steamcmd="${required_apps_steamcmd}+force_install_dir ${distrib_dir}/${i} +app_update ${i} validate "
+                    fi
+                done
                 if [ -n "${required_apps_steamcmd}" ]; then
                     screen -AmdLS aio_distrib_setup "${steamcmd} +login anonymous ${required_apps_steamcmd} +quit"
                 fi
