@@ -77,7 +77,7 @@
                     fi
                 done
                 if [ -n "${required_apps_steamcmd}" ]; then
-                    screen -AmdLS aio_distrib_setup "${steamcmd} +login anonymous ${required_apps_steamcmd} +quit"
+                    screen -AmdS aio_distrib_setup "${steamcmd} +login anonymous ${required_apps_steamcmd} +quit"
                 fi
             fi
         fi
